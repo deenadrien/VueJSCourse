@@ -9,10 +9,10 @@
       <button class="btn btn-success" @click="createList()">Ajouter</button>
     </div>
     <hr>
-    <input class="form-control" type="text" v-model="searchWord" placeholder="Recherche...">
+    <input class="form-control" type="text" v-model="searchWord" placeholder="Recherche..." id="search">
     <div v-if="searchWord">
       <ul>
-        <li v-for="possibility in getFilteredPossibilities" :key="possibility">{{ possibility.label }}</li>
+        <li v-for="possibility in getFilteredPossibilities" :key="possibility.id" @click="goToList(possibility.id,possibility.name)">{{ possibility.name }}</li>
       </ul>
     </div>
     <hr>
@@ -76,7 +76,7 @@
     },
     computed: {
       getFilteredPossibilities: function(){
-        return this.lists.filter(possibility => possibility.includes(this.searchWord));
+        return this.lists.filter(possibility => possibility.name.includes(this.searchWord));
       }
     }
 }
@@ -123,4 +123,22 @@
     width: 5%;
     display: block;
   }
+
+  li{
+        list-style-type: none;
+        background-color: #576574;
+        color: #c8d6e5;
+        font-weight: bold;
+    }
+
+    li:hover{
+        list-style-type: none;
+        background-color: #c8d6e5;
+        color: #222f3e;
+        font-weight: bold;
+    }
+
+    #search{
+      width: 100%;
+    }
 </style>
